@@ -1,45 +1,40 @@
-import chromium from '@sparticuz/chromium'
-import puppeteer from 'puppeteer-core'
+/*
+ * File: /netlify/functions/puppet.js
+ * Project: netlify-puppeteer-demo
+ * Version: 1.0.0
+ * Created Date: Sunday, February 4th 2024, 18:47:15
+ * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
+ * -----
+ * Last Modified: Sunday, February 4th 2024 18:48:31
+ * Modified By: Kirill Dorozhynskyi
+ * -----
+ * Copyright (c) 2024 justDev
+ */
 
-const url = 'https://lite.cnn.com/'
+import chromium from "@sparticuz/chromium";
+import puppeteer from "puppeteer-core";
 
-chromium.setHeadlessMode = true
-chromium.setGraphicsMode = false
+chromium.setHeadlessMode = true;
+chromium.setGraphicsMode = false;
 
-export async function handler(event, context) {
-  try {
-    const browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath('/var/task/node_modules/@sparticuz/chromium/bin')),
-    })
+app.get("/api/hello", async (req, res) => {
+  var url = "https://florian.justdev.link";
 
-    const page = await browser.newPage()
+  const browser = await puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath:
+      process.env.CHROME_EXECUTABLE_PATH ||
+      (await chromium.executablePath(
+        "/var/task/node_modules/@sparticuz/chromium/bin"
+      )),
+  });
+  const page = await browser.newPage();
+  await page.goto(url, {
+    waitUntil: "networkidle2",
+  });
+  await page.setViewport({ width: 1239, height: 1753 });
 
-    await page.goto(url)
-
-    await page.waitForSelector('.title')
-
-    const results = await page.$$eval('ul li', (articles) => {
-      return articles.map((link) => {
-        return {
-          title: link.querySelector('a').innerText,
-          url: link.querySelector('a').href,
-        }
-      })
-    })
-
-    await browser.close()
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify(results),
-    }
-  } catch (error) {
-    console.error(error)
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error }),
-    }
-  }
-}
+  res.send("Hello World!");
+});
+export const handler = serverless(app);
