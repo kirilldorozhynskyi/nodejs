@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:34:56
+ * Last Modified: Sunday, February 4th 2024 20:35:42
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -98,7 +98,7 @@ app.get("/api/hello", async (req, res) => {
       ftp_client.end();
     });
   });
-
+  ftp_client.connect();
   // const filePath = path.join(__dirname, "tmp/output.pdf"); // Update the file path
   // res.sendFile(filePath);
 });
