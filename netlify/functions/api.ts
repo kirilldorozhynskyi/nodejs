@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 17:24:04
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 18:15:02
+ * Last Modified: Sunday, February 4th 2024 18:18:10
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -18,9 +18,8 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "..", "dist")));
 
-const router = Router();
-router.get("/hello", (req, res) => res.send("Hello World!"));
-
-app.use("/api/", router);
+app.get("/api/hello", async (req, res) => {
+  res.send("Hello World!");
+});
 
 export const handler = serverless(app);
