@@ -1,8 +1,12 @@
+# example netlify.toml
+[build]
+  command = "# no build command"
+  functions = "netlify/functions"
+  publish = "."
+
+[dev]
+  autoLaunch = false
+
 [functions]
-  external_node_modules = ["express", "puppeteer"]
   node_bundler = "esbuild"
-[[redirects]]
-  force = true
-  from = "/api/*"
-  status = 200
-  to = "/.netlify/functions/api/:splat"
+  external_node_modules = ["@sparticuz/chromium"]
