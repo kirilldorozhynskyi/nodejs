@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:55:13
+ * Last Modified: Sunday, February 4th 2024 20:58:54
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -16,6 +16,7 @@ import puppeteer from "puppeteer-core";
 import express from "express";
 import serverless from "serverless-http";
 import SftpClient from "ssh2-sftp-client";
+// import path from "path"; // Import the 'path' module
 
 const app = express();
 
@@ -62,10 +63,10 @@ app.get("/api/hello", async (req, res) => {
   // res.contentType("application/pdf");
   // res.send(pdf);
 
-  const pdfURL = path.join(__dirname, "/tmp/", "kvartet_.pdf");
+  // const pdfURL = path.join(__dirname, "/tmp/", "kvartet_.pdf");
 
   const pdf = await page.pdf({
-    path: pdfURL, // Save to /tmp directory
+    // path: pdfURL, // Save to /tmp directory
     format: "A4",
     printBackground: true,
     displayHeaderFooter: false,
