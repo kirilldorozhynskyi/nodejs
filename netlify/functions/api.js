@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:05:35
+ * Last Modified: Sunday, February 4th 2024 20:09:38
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -60,11 +60,8 @@ app.get("/api/hello", async (req, res) => {
     "Content-Length": pdf.length,
   });
 
-  const filePath = path.join(__dirname, "/tmp/output.pdf");
+  const filePath = path.join(__dirname, "tmp/output.pdf"); // Update the file path
   res.sendFile(filePath);
-
-  // No need to send "Hello World!" after sending the file
-  // res.send("Hello World!");
 });
 
 export const handler = serverless(app);
