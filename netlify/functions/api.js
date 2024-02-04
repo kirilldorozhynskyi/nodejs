@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:41:45
+ * Last Modified: Sunday, February 4th 2024 20:43:04
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -60,7 +60,7 @@ app.get("/api/hello", async (req, res) => {
     "Content-Length": pdf.length,
   });
 
-  console.log(pdf);
+  // console.log(pdf);
 
   // // // Uncomment the lines below if you want to send the PDF in the response
   // // res.contentType("application/pdf");
