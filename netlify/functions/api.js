@@ -1,11 +1,11 @@
 /*
- * File: /netlify/functions/puppet.js
+ * File: /netlify/functions/api.js
  * Project: netlify-puppeteer-demo
  * Version: 1.0.0
  * Created Date: Sunday, February 4th 2024, 18:47:15
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 18:59:33
+ * Last Modified: Sunday, February 4th 2024 20:01:08
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -16,6 +16,8 @@ import puppeteer from "puppeteer-core";
 
 import express, { Router } from "express";
 import serverless from "serverless-http";
+
+const app = express();
 
 chromium.setHeadlessMode = true;
 chromium.setGraphicsMode = false;
