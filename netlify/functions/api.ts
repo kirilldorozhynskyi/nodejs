@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 17:24:04
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 17:42:30
+ * Last Modified: Sunday, February 4th 2024 18:10:06
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -44,12 +44,12 @@ router.get("/hello", async (req, res) => {
   });
 
   await browser.close();
-  res.set({
-    "Content-Type": "application/pdf",
-    "Content-Length": pdf.length,
-  });
-  const filePath = path.join(__dirname, "output.pdf");
-  res.sendFile(filePath);
+  //   res.set({
+  //     "Content-Type": "application/pdf",
+  //     "Content-Length": pdf.length,
+  //   });
+  //   const filePath = path.join(__dirname, "output.pdf");
+  //   res.sendFile(filePath);
 });
 
 api.use("/api/", router);
