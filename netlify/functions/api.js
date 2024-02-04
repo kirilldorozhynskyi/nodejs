@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:49:49
+ * Last Modified: Sunday, February 4th 2024 20:55:13
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -15,7 +15,7 @@ import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 import express from "express";
 import serverless from "serverless-http";
-const path = require("path");
+import SftpClient from "ssh2-sftp-client";
 
 const app = express();
 
@@ -79,13 +79,34 @@ app.get("/api/hello", async (req, res) => {
 
   await browser.close();
 
-  res.set({
-    "Content-Type": "application/pdf",
-    "Content-Length": pdf.length,
-  });
+  // Use SFTP to upload the PDF
+  const sftp = new SftpClient();
 
-  // const filePath = path.join(__dirname, "tmp/output.pdf"); // Update the file path
-  res.sendFile(pdfURL);
+  const sftpConfig = {
+    host: "justdev.link",
+    port: 22,
+    username: "netify.justdev.link",
+    password: "Fi93~$7u=f",
+  };
+
+  try {
+    await sftp.connect(sftpConfig);
+    await sftp.put(Buffer.from(pdf), "output.pdf"); // Upload the PDF
+    res.status(200).send("PDF uploaded successfully via SFTP");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error uploading PDF via SFTP");
+  } finally {
+    await sftp.end();
+  }
+
+  // res.set({
+  //   "Content-Type": "application/pdf",
+  //   "Content-Length": pdf.length,
+  // });
+
+  // // const filePath = path.join(__dirname, "tmp/output.pdf"); // Update the file path
+  // res.sendFile(pdfURL);
 });
 
 export const handler = serverless(app);
