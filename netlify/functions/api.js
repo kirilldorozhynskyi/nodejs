@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:40:29
+ * Last Modified: Sunday, February 4th 2024 20:41:45
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -60,27 +60,29 @@ app.get("/api/hello", async (req, res) => {
     "Content-Length": pdf.length,
   });
 
-  // // Uncomment the lines below if you want to send the PDF in the response
-  // res.contentType("application/pdf");
-  // res.send(pdf);
+  console.log(pdf);
 
-  // Uncomment the lines below if you want to upload the PDF via FTP
-  let ftp_client = new FTPClient();
-  let ftpConfig = {
-    host: "37.9.175.181",
-    port: 21,
-    user: "netify.justdev.link",
-    password: "Fi93~$7u=f",
-  };
+  // // // Uncomment the lines below if you want to send the PDF in the response
+  // // res.contentType("application/pdf");
+  // // res.send(pdf);
 
-  ftp_client.connect(ftpConfig);
+  // // Uncomment the lines below if you want to upload the PDF via FTP
+  // let ftp_client = new FTPClient();
+  // let ftpConfig = {
+  //   host: "37.9.175.181",
+  //   port: 21,
+  //   user: "netify.justdev.link",
+  //   password: "Fi93~$7u=f",
+  // };
 
-  ftp_client.on("ready", function () {
-    ftp_client.put(pdf, "output.pdf", function (err) {
-      if (err) throw err;
-      ftp_client.end();
-    });
-  });
+  // ftp_client.connect(ftpConfig);
+
+  // ftp_client.on("ready", function () {
+  //   ftp_client.put(pdf, "output.pdf", function (err) {
+  //     if (err) throw err;
+  //     ftp_client.end();
+  //   });
+  // });
 
   // Remove the redundant ftp_client.connect();
 });
