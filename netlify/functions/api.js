@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:03:32
+ * Last Modified: Sunday, February 4th 2024 20:05:35
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -23,7 +23,7 @@ chromium.setHeadlessMode = true;
 chromium.setGraphicsMode = false;
 
 app.get("/api/hello", async (req, res) => {
-  var url = "https://florian.justdev.link";
+  var url = "https://crm.justdev.link";
 
   const browser = await puppeteer.launch({
     args: chromium.args,
