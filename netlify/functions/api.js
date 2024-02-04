@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:49:24
+ * Last Modified: Sunday, February 4th 2024 20:49:49
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -15,20 +15,12 @@ import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 import express from "express";
 import serverless from "serverless-http";
-const FTPClient = require("ftp");
+const path = require("path");
 
 const app = express();
 
 chromium.setHeadlessMode = true;
 chromium.setGraphicsMode = false;
-
-let ftp_client = new FTPClient();
-let ftpConfig = {
-  host: "localhost",
-  port: 21,
-  user: "test",
-  password: "test",
-};
 
 app.get("/api/hello", async (req, res) => {
   var url = "https://crm.justdev.link";
