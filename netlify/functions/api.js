@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:32:07
+ * Last Modified: Sunday, February 4th 2024 20:34:56
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -70,32 +70,31 @@ app.get("/api/hello", async (req, res) => {
   // res.contentType("application/pdf");
   // res.send(pdf);
 
-  const pdf = await page.pdf({
-    // path: "/tmp/output.pdf", // Save to /tmp directory
-    format: "A4",
-    printBackground: true,
-    displayHeaderFooter: false,
-    margin: {
-      top: "0",
-      right: "0",
-      bottom: "0",
-      left: "0",
-    },
-  });
+  // const pdf = await page.pdf({
+  //   // path: "/tmp/output.pdf", // Save to /tmp directory
+  //   format: "A4",
+  //   printBackground: true,
+  //   displayHeaderFooter: false,
+  //   margin: {
+  //     top: "0",
+  //     right: "0",
+  //     bottom: "0",
+  //     left: "0",
+  //   },
+  // });
 
-  await browser.close();
+  // await browser.close();
 
-  res.set({
-    "Content-Type": "application/pdf",
-    "Content-Length": pdf.length,
-  });
+  // res.set({
+  //   "Content-Type": "application/pdf",
+  //   "Content-Length": pdf.length,
+  // });
 
   ftp_client.connect(ftpConfig);
 
   ftp_client.on("ready", function () {
-    ftp_client.list(function (err, list) {
+    ftp_client.put("foo.txt", "foo.remote-copy.txt", function (err) {
       if (err) throw err;
-      console.dir(list);
       ftp_client.end();
     });
   });
