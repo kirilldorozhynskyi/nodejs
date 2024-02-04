@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 21:00:06
+ * Last Modified: Sunday, February 4th 2024 21:05:08
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -84,10 +84,10 @@ app.get("/api/hello", async (req, res) => {
   const sftp = new SftpClient();
 
   const sftpConfig = {
-    host: "justdev.link",
-    port: 22,
-    username: "netify.justdev.link",
-    password: "Fi93~$7u=f",
+    host: process.env.SFTP_HOST,
+    port: parseInt(process.env.SFTP_PORT, 10),
+    username: process.env.SFTP_USERNAME,
+    password: process.env.SFTP_PASSWORD,
   };
 
   try {
