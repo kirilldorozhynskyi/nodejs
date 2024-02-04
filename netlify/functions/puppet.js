@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 18:47:15
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 18:48:31
+ * Last Modified: Sunday, February 4th 2024 18:53:54
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -13,6 +13,9 @@
 
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
+
+import express, { Router } from "express";
+import serverless from "serverless-http";
 
 chromium.setHeadlessMode = true;
 chromium.setGraphicsMode = false;
