@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:09:38
+ * Last Modified: Sunday, February 4th 2024 20:12:31
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -41,7 +41,7 @@ app.get("/api/hello", async (req, res) => {
   await page.setViewport({ width: 1239, height: 1753 });
 
   const pdf = await page.pdf({
-    path: "/tmp/output.pdf", // Save to /tmp directory
+    // path: "/tmp/output.pdf", // Save to /tmp directory
     format: "A4",
     printBackground: true,
     displayHeaderFooter: false,
@@ -60,8 +60,8 @@ app.get("/api/hello", async (req, res) => {
     "Content-Length": pdf.length,
   });
 
-  const filePath = path.join(__dirname, "tmp/output.pdf"); // Update the file path
-  res.sendFile(filePath);
+  res.contentType("application/pdf");
+  res.send(pdf);
 });
 
 export const handler = serverless(app);
