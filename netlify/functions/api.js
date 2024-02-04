@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 21:05:08
+ * Last Modified: Sunday, February 4th 2024 21:50:27
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -16,7 +16,6 @@ import puppeteer from "puppeteer-core";
 import express from "express";
 import serverless from "serverless-http";
 import SftpClient from "ssh2-sftp-client";
-// import path from "path"; // Import the 'path' module
 
 const app = express();
 
@@ -40,30 +39,6 @@ app.get("/api/hello", async (req, res) => {
     waitUntil: "networkidle2",
   });
   await page.setViewport({ width: 1239, height: 1753 });
-
-  // const pdf = await page.pdf({
-  //   format: "A4",
-  //   printBackground: true,
-  //   displayHeaderFooter: false,
-  //   margin: {
-  //     top: "0",
-  //     right: "0",
-  //     bottom: "0",
-  //     left: "0",
-  //   },
-  // });
-
-  // await browser.close();
-
-  // // res.set({
-  // //   "Content-Type": "application/pdf",
-  // //   "Content-Length": pdf.length,
-  // // });
-
-  // res.contentType("application/pdf");
-  // res.send(pdf);
-
-  // const pdfURL = path.join(__dirname, "/tmp/", "kvartet_.pdf");
 
   const pdf = await page.pdf({
     // path: pdfURL, // Save to /tmp directory
@@ -93,21 +68,13 @@ app.get("/api/hello", async (req, res) => {
   try {
     await sftp.connect(sftpConfig);
     await sftp.put(Buffer.from(pdf), "output.pdf"); // Upload the PDF
-    res.status(200).send("PDF uploaded successfully via SFTP");
+    res.redirect("https://crm.justdev.link");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error uploading PDF via SFTP" + err);
   } finally {
     await sftp.end();
   }
-
-  // res.set({
-  //   "Content-Type": "application/pdf",
-  //   "Content-Length": pdf.length,
-  // });
-
-  // // const filePath = path.join(__dirname, "tmp/output.pdf"); // Update the file path
-  // res.sendFile(pdfURL);
 });
 
 export const handler = serverless(app);
