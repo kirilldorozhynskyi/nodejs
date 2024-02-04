@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:58:54
+ * Last Modified: Sunday, February 4th 2024 21:00:06
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -96,7 +96,7 @@ app.get("/api/hello", async (req, res) => {
     res.status(200).send("PDF uploaded successfully via SFTP");
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error uploading PDF via SFTP");
+    res.status(500).send("Error uploading PDF via SFTP" + err);
   } finally {
     await sftp.end();
   }
