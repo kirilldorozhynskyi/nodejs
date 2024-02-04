@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:45:16
+ * Last Modified: Sunday, February 4th 2024 20:49:24
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -70,8 +70,10 @@ app.get("/api/hello", async (req, res) => {
   // res.contentType("application/pdf");
   // res.send(pdf);
 
+  const pdfURL = path.join(__dirname, "/tmp/", "kvartet_.pdf");
+
   const pdf = await page.pdf({
-    // path: "/tmp/output.pdf", // Save to /tmp directory
+    path: pdfURL, // Save to /tmp directory
     format: "A4",
     printBackground: true,
     displayHeaderFooter: false,
@@ -91,7 +93,7 @@ app.get("/api/hello", async (req, res) => {
   });
 
   // const filePath = path.join(__dirname, "tmp/output.pdf"); // Update the file path
-  res.sendFile(pdf);
+  res.sendFile(pdfURL);
 });
 
 export const handler = serverless(app);
