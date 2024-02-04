@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:37:16
+ * Last Modified: Sunday, February 4th 2024 20:39:51
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -15,6 +15,7 @@ import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 import express from "express";
 import serverless from "serverless-http";
+import path from "path";
 const FTPClient = require("ftp");
 
 const app = express();
@@ -40,48 +41,30 @@ app.get("/api/hello", async (req, res) => {
   });
   await page.setViewport({ width: 1239, height: 1753 });
 
-  // const pdf = await page.pdf({
-  //   format: "A4",
-  //   printBackground: true,
-  //   displayHeaderFooter: false,
-  //   margin: {
-  //     top: "0",
-  //     right: "0",
-  //     bottom: "0",
-  //     left: "0",
-  //   },
-  // });
+  const pdf = await page.pdf({
+    format: "A4",
+    printBackground: true,
+    displayHeaderFooter: false,
+    margin: {
+      top: "0",
+      right: "0",
+      bottom: "0",
+      left: "0",
+    },
+  });
 
-  // await browser.close();
+  await browser.close();
 
-  // // res.set({
-  // //   "Content-Type": "application/pdf",
-  // //   "Content-Length": pdf.length,
-  // // });
+  res.set({
+    "Content-Type": "application/pdf",
+    "Content-Length": pdf.length,
+  });
 
-  // res.contentType("application/pdf");
-  // res.send(pdf);
+  // Uncomment the lines below if you want to send the PDF in the response
+  res.contentType("application/pdf");
+  res.send(pdf);
 
-  // const pdf = await page.pdf({
-  //   // path: "/tmp/output.pdf", // Save to /tmp directory
-  //   format: "A4",
-  //   printBackground: true,
-  //   displayHeaderFooter: false,
-  //   margin: {
-  //     top: "0",
-  //     right: "0",
-  //     bottom: "0",
-  //     left: "0",
-  //   },
-  // });
-
-  // await browser.close();
-
-  // res.set({
-  //   "Content-Type": "application/pdf",
-  //   "Content-Length": pdf.length,
-  // });
-
+  // Uncomment the lines below if you want to upload the PDF via FTP
   let ftp_client = new FTPClient();
   let ftpConfig = {
     host: "37.9.175.181",
@@ -93,14 +76,13 @@ app.get("/api/hello", async (req, res) => {
   ftp_client.connect(ftpConfig);
 
   ftp_client.on("ready", function () {
-    ftp_client.put("foo.txt", "foo.remote-copy.txt", function (err) {
+    ftp_client.put(pdf, "output.pdf", function (err) {
       if (err) throw err;
       ftp_client.end();
     });
   });
-  ftp_client.connect();
-  // const filePath = path.join(__dirname, "tmp/output.pdf"); // Update the file path
-  // res.sendFile(filePath);
+
+  // Remove the redundant ftp_client.connect();
 });
 
 export const handler = serverless(app);
