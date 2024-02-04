@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:39:51
+ * Last Modified: Sunday, February 4th 2024 20:40:29
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -60,9 +60,9 @@ app.get("/api/hello", async (req, res) => {
     "Content-Length": pdf.length,
   });
 
-  // Uncomment the lines below if you want to send the PDF in the response
-  res.contentType("application/pdf");
-  res.send(pdf);
+  // // Uncomment the lines below if you want to send the PDF in the response
+  // res.contentType("application/pdf");
+  // res.send(pdf);
 
   // Uncomment the lines below if you want to upload the PDF via FTP
   let ftp_client = new FTPClient();
