@@ -5,7 +5,7 @@
  * Created Date: Sunday, February 4th 2024, 19:05:54
  * Author: Kirill Dorozhynskyi - kirilldy@justdev.org
  * -----
- * Last Modified: Sunday, February 4th 2024 20:35:42
+ * Last Modified: Sunday, February 4th 2024 20:37:16
  * Modified By: Kirill Dorozhynskyi
  * -----
  * Copyright (c) 2024 justDev
@@ -21,14 +21,6 @@ const app = express();
 
 chromium.setHeadlessMode = true;
 chromium.setGraphicsMode = false;
-
-let ftp_client = new FTPClient();
-let ftpConfig = {
-  host: "37.9.175.181",
-  port: 21,
-  user: "netify.justdev.link",
-  password: "Fi93~$7u=f",
-};
 
 app.get("/api/hello", async (req, res) => {
   var url = "https://crm.justdev.link";
@@ -89,6 +81,14 @@ app.get("/api/hello", async (req, res) => {
   //   "Content-Type": "application/pdf",
   //   "Content-Length": pdf.length,
   // });
+
+  let ftp_client = new FTPClient();
+  let ftpConfig = {
+    host: "37.9.175.181",
+    port: 21,
+    user: "netify.justdev.link",
+    password: "Fi93~$7u=f",
+  };
 
   ftp_client.connect(ftpConfig);
 
